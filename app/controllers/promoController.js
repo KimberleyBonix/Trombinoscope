@@ -23,7 +23,7 @@ const promoController = {
     if (isNaN(promoId)) { return next(); /* 404 */ }
 
     // Query à la BDD
-    db.query(`SELECT * FROM "promo" WHERE id = ${promoId}`)
+    db.query(`SELECT * FROM "promo" WHERE id = $1`, [promoId])
     
       .then(result => {
         // Gestion 404
