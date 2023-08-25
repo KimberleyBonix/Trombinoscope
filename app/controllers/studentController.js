@@ -1,10 +1,7 @@
-const promos = require("../../data/promos.json"); // [{}, {}, {}]
-const students = require("../../data/students.json"); // [{}, {}, {}]
-
 const db = require('../database/client');
 
 const studentController = {
-  renderAllStudentsOfPromoPage(req, res, next) {
+  /* renderAllStudentsOfPromoPage(req, res, next) {
     const promoId = Number(req.params.id);
 
     db.query(`SELECT * FROM "student" WHERE promo_id = ${promoId}`)
@@ -13,13 +10,38 @@ const studentController = {
         if (result.rows.length === 0) {next();  return;}
 
         const promoStudents = result.rows;
-
-        res.render("students", { students: promoStudents });
+        res.render("students", { students: promoStudents, promo });
       })
       .catch(error => {
         res.status(404).render("500");
       });
 
+  }, */
+
+  renderAllStudentsOfPromoPage(req, res, next) {
+    const promoId = Number(req.params.id);
+  
+    // Query to fetch promo information
+    const promoQuery = `SELECT * FROM "promo" WHERE id = ${promoId}`;
+  
+    // Query to fetch students of the promo
+    const studentsQuery = `SELECT * FROM "student" WHERE promo_id = ${promoId}`;
+  
+    db.query(promoQuery)
+      .then(promoResult => {
+        const promo = promoResult.rows[0];
+        
+        if (!promo) {next();return;}
+  
+        db.query(studentsQuery)
+          .then(studentsResult => {
+            const promoStudents = studentsResult.rows;
+            res.render("students", { students: promoStudents, promo });
+          });
+      })
+      .catch(error => {
+        res.status(404).render("500");
+      });
   },
 
   renderOneStudentPage(req, res, next) {
@@ -27,15 +49,14 @@ const studentController = {
 
     db.query(`SELECT * FROM "student" WHERE "id" = ${studentId}`)
       .then(result => {
-        if (result.rows.length === 0) {
-          next();  return;}
+        if (result.rows.length === 0) {next();return;}
 
         const student = result.rows[0];
         res.render("student", { student });
       })
       .catch(error => {
         res.status(500).send("500");
-      })
+      });
   }
 };
 
