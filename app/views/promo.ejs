@@ -1,0 +1,13 @@
+<%- include('partials/header') %>
+
+<main>
+  <h1>Page de la promo <%= promo.name %></h1>
+
+  <p>ID de la promo : <%= promo.id %></p>
+
+  <p><a href="<%= promo.github_organization %>">Lien vers le Github</a></p>
+
+  <p><a href="/promo/<%= promo.id %>/students">Voir les étudiants de la promotion</a></p>
+</main>
+    
+<%- include('partials/footer') %>

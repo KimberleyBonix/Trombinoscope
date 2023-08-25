@@ -1,0 +1,11 @@
+# On déclare dans ce fichier les dossiers et fichiers qu'on souhaite exclure de git/github. En l'occurence : 
+# - les fichiers qu'on peut re-générer
+# - les fichiers qu'on doit cacher (mdp)
+# - les fichiers propre à un environnement particulier !
+
+
+# On peut réinstaller les node_modules via `npm install`
+node_modules
+
+# Chaque dev a son propre fichier d'environnement
+.env

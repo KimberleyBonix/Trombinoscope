@@ -1,0 +1,15 @@
+<%- include('partials/header') %>
+
+<main>
+
+  <h1>Liste des promos</h1>
+
+  <ul>
+    <% promos.forEach(promo => { %>
+      <li><a href="/promo/<%= promo.id %>"><%= promo.name %></a></li>
+    <% }) %>
+  </ul>
+
+</main>
+    
+<%- include('partials/footer') %>

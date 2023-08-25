@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+
+<main>
+  <h2>Liste des étudiants</h2>
+
+  <%# JSON.stringify(students) %>
+
+  <div>
+    <% students.forEach(student => { %>
+      <a href="/student/<%= student.id %>">
+        <article>
+          <img src="<%= student.profile_picture_url %>" alt="<%= student.github_username %>">
+
+          <div>
+            <p><%= student.first_name %> <%= student.last_name %></p>
+            <a href="https://github.com/<%= student.github_username %>">⌨️ <%= student.github_username %></a>
+          </div>
+
+        </article>
+      </a>
+    <% }) %>
+  </div>
+</main>
+    
+<%- include('partials/footer') %>

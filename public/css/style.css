@@ -1,0 +1,22 @@
+body {
+  width: 80%;
+  margin: 0 auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+header img {
+  width: 200px;
+}
+
+article {
+  display: flex;
+  gap: 50px;
+}
+
+article img {
+  width: 200px;
+}
