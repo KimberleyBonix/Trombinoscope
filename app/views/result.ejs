@@ -1,0 +1,12 @@
+<%- include('partials/header') %>
+
+<h2>Les résultats</h2>
+
+<p>Nous avons trouvés <%= results.length %> résultats correspondant à votre recherche :</p>
+<ul>
+    <% results.forEach((result) => {%>
+        <li><a href="/promo/<%= result.id %>"><%= result.name %></a></li>
+    <%}) %>
+</ul>
+    
+<%- include('partials/footer') %>

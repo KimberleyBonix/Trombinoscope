@@ -1,12 +1,10 @@
-const db = require("../database/client");
+const promoDataMapper = require("../models/promoDataMapper");
 
 const promoController = {
   renderAllPromosPage: async(req, res) => {
     try {
-      const promoResult = await db.query('SELECT * FROM "promo" ORDER BY name ASC');
-      const promos = promoResult.rows;
+      const promos = await promoDataMapper.getAllPromos();
       res.render("promos", { promos });
-
     } 
     catch (error){
       res.status(404).render("500");
@@ -19,10 +17,8 @@ const promoController = {
     if (isNaN(promoId)) { return next();}
 
     try {
-      const promoResult = await db.query(`SELECT * FROM "promo" WHERE id = $1`, [promoId]);
-      if (promoResult.rows.length === 0) { next(); return; }
+      const promo = await promoDataMapper.getPromoFromId(promoId);
 
-      const promo = promoResult.rows[0]; 
       res.render("promo", { promo });
     } 
     catch (error){

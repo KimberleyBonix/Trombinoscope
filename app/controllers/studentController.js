@@ -1,19 +1,18 @@
-const db = require('../database/client');
+const studentDataMapper = require("../models/studentDataMapper");
 
 const studentController = {
   renderAllStudentsOfPromoPage: async(req, res, next) => {
     const promoId = Number(req.params.id);
+    if (isNaN(promoId)){return next();}
 
     try {
-      const promoResult = await db.query(`SELECT * FROM "promo" WHERE id = $1`, [promoId]);
+      const promoOfStudent = await studentDataMapper.getPromoOfStudent(promoId);
+      if (!promoOfStudent) {next();return;}
 
-      const promo = promoResult.rows[0];
-      if (!promo) {next();return;}
+      const allStudentOfPromo = await studentDataMapper.getAllStudentOfPromo(promoId);
+      if (allStudentOfPromo.length === 0){next();return;}
 
-      const studentsResult = await db.query(`SELECT * FROM "student" WHERE promo_id = $1`, [promoId]);
-
-      const promoStudents = studentsResult.rows;
-      res.render("students", { students: promoStudents, promo });
+      res.render("students", { students: allStudentOfPromo, promo: promoOfStudent });
 
     }
     catch (error){
@@ -26,11 +25,9 @@ const studentController = {
     const studentId = parseInt(req.params.id);
 
     try {
-      const studentPageResult = await db.query(`SELECT * FROM "student" WHERE "id" = $1`, [studentId]);
-
-      if (studentPageResult.rows.length === 0) {next();return;}
-
-      const student = studentPageResult.rows[0];
+      const student = await studentDataMapper.getStudent(studentId);
+      if (!student){return next();}
+      
       res.render("student", { student});
     }
     catch(error) {

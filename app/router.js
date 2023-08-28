@@ -5,6 +5,8 @@ const router = Router(); // On créé un router
 const mainController = require("./controllers/mainController");
 const promoController = require("./controllers/promoController");
 const studentController = require("./controllers/studentController");
+const searchController = require("./controllers/searchController");
+const userController = require("./controllers/userController");
 
 // On paramètre notre router
 router.get("/", mainController.renderHomePage);
@@ -12,8 +14,13 @@ router.get("/promos", promoController.renderAllPromosPage);
 router.get("/promo/:id", promoController.renderOnePromoPage);
 
 router.get("/promo/:id/students", studentController.renderAllStudentsOfPromoPage);
-
 router.get("/student/:id", studentController.renderOneStudentPage);
+
+router.get("/search", searchController.renderSearchPage);
+router.get("/search/result", searchController.renderResultPage);
+
+router.get("/login", userController.renderLoginPage);
+
 
 // Middleware 404
 // Ce middleware va être appelé APRES les middleware GET déclarés au dessus, pour TOUTES les routes qui arriveraient à ce niveau !
