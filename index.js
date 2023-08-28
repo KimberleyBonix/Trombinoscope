@@ -9,6 +9,8 @@ const router = require("./app/router");
 // Create app
 const app = express();
 
+express.urlencoded({extended: true});
+
 // Configure view engine
 app.set("view engine", "ejs");
 app.set("views", "./app/views");

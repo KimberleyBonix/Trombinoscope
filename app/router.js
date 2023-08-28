@@ -6,7 +6,7 @@ const mainController = require("./controllers/mainController");
 const promoController = require("./controllers/promoController");
 const studentController = require("./controllers/studentController");
 const searchController = require("./controllers/searchController");
-const userController = require("./controllers/userController");
+const adminController = require("./controllers/adminController");
 
 // On paramètre notre router
 router.get("/", mainController.renderHomePage);
@@ -19,7 +19,8 @@ router.get("/student/:id", studentController.renderOneStudentPage);
 router.get("/search", searchController.renderSearchPage);
 router.get("/search/result", searchController.renderResultPage);
 
-router.get("/login", userController.renderLoginPage);
+router.get("/admin/addStudent", adminController.renderAddStudentPage);
+router.post("/student", adminController.createStudent);
 
 
 // Middleware 404

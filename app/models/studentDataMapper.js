@@ -15,7 +15,15 @@ const studentDataMapper = {
     async getStudent(studentId){
         const studentPageResult = await db.query(`SELECT * FROM "student" WHERE "id" = $1`, [studentId]);
         return studentPageResult.rows[0];
-    }
+    },
+
+    async addNewStudent(studentObj){
+        const {first_name, last_name, github_username, profile_picture_url, promo_id} = studentObj;
+        const sqlQuery = `INSERT INTO student("first_name", "last_name","github_username","profile_picture_url", "promo_id") VALUES($1, $2, $3, $4, $5) RETURNING *`;
+        const newStudent = await db.query(sqlQuery, [first_name, last_name, github_username, profile_picture_url, promo_id]);
+        return newStudent.rows[0];
+
+    },
 };
 
 
