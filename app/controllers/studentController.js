@@ -1,6 +1,11 @@
 const studentDataMapper = require("../models/studentDataMapper");
 
 const studentController = {
+  renderAllStudentPage: async(req, res)=> {
+    const allStudent = await studentDataMapper.getAllStudent();
+    res.render('students', {students: allStudent, promo: null});
+  },
+
   renderAllStudentsOfPromoPage: async(req, res, next) => {
     const promoId = Number(req.params.id);
     if (isNaN(promoId)){return next();}
@@ -33,7 +38,8 @@ const studentController = {
     catch(error) {
       res.status(500).send("500");
     }
-  }
+  },
+
 };
 
 module.exports = studentController;

@@ -13,6 +13,7 @@ router.get("/", mainController.renderHomePage);
 router.get("/promos", promoController.renderAllPromosPage);
 router.get("/promo/:id", promoController.renderOnePromoPage);
 
+router.get("/students", studentController.renderAllStudentPage);
 router.get("/promo/:id/students", studentController.renderAllStudentsOfPromoPage);
 router.get("/student/:id", studentController.renderOneStudentPage);
 
@@ -20,7 +21,9 @@ router.get("/search", searchController.renderSearchPage);
 router.get("/search/result", searchController.renderResultPage);
 
 router.get("/admin/addStudent", adminController.renderAddStudentPage);
-router.post("/student", adminController.createStudent);
+router.post("/admin/addStudent", adminController.createStudent);
+
+
 
 
 // Middleware 404

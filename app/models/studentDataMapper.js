@@ -1,6 +1,11 @@
 const db = require('../database/client');
 
 const studentDataMapper = {
+    async getAllStudent(){
+        const allStudentResult = await db.query(`SELECT * FROM "student" ORDER BY last_name ASC LIMIT 10`);
+        return allStudentResult.rows;
+
+    },
 
     async getPromoOfStudent(promoId) {
         const promoResult = await db.query(`SELECT * FROM "promo" WHERE id = $1`, [promoId]);
@@ -17,13 +22,12 @@ const studentDataMapper = {
         return studentPageResult.rows[0];
     },
 
-    async addNewStudent(studentObj){
-        const {first_name, last_name, github_username, profile_picture_url, promo_id} = studentObj;
-        const sqlQuery = `INSERT INTO student("first_name", "last_name","github_username","profile_picture_url", "promo_id") VALUES($1, $2, $3, $4, $5) RETURNING *`;
-        const newStudent = await db.query(sqlQuery, [first_name, last_name, github_username, profile_picture_url, promo_id]);
+    async createNewStudent(student){
+        const { first_name, last_name, github_username, profile_picture_url, promo_id } = student;
+        const sqlQuery = `INSERT INTO student("first_name", "last_name", "github_username", "profile_picture_url", "promo_id") VALUES ($1, $2, $3, $4, $5) RETURNING *`;
+        const newStudent = await db.query(sqlQuery, [first_name, last_name, github_username, null, promo_id]);
         return newStudent.rows[0];
-
-    },
+    }
 };
 
 

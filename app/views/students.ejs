@@ -1,9 +1,9 @@
 <%- include('partials/header') %>
 
 <main>
-  <h2>Liste des étudiants de la <%= promo.name %></h2>
-
-  <%# JSON.stringify(students) %>
+  <h2>Liste des étudiants 
+    <% if(promo){ %>de la <%=promo.name%> <%}%>
+  </h2>
 
   <div>
     <% students.forEach(student => { %>
