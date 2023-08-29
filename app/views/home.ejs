@@ -2,7 +2,12 @@
 
 <main>
   <h2>Bienvenue sur le trombinoscope de l'école O'clock</h2>
-  <a href="/promos">Voir la liste de promos</a>
+  <a href="/promos">Voir la liste de promos</a> 
+    
+  <% if(user === 'Michel') {%>
+    <hr/>
+    <a href="/admin/addStudent">Ajouter un utilisateur</a>
+    <% } %>
 </main>
     
 <%- include('partials/footer') %>

@@ -1,6 +1,7 @@
 const mainController = {
   renderHomePage(req, res) {
-    res.render("home");
+    const user = req.session.login;
+    res.render("home", {user});
   }
 };
 

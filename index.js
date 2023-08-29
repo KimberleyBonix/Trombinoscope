@@ -4,11 +4,21 @@ require("dotenv").config();
 
 // Import dependences
 const express = require("express");
+const session = require("express-session");
 const router = require("./app/router");
 
 // Create app
 const app = express();
 
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {}
+
+}));
+
+// Use post method
 app.use(express.json());
 app.use(express.urlencoded({
   extended : false

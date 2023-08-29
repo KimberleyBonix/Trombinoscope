@@ -7,6 +7,7 @@ const promoController = require("./controllers/promoController");
 const studentController = require("./controllers/studentController");
 const searchController = require("./controllers/searchController");
 const adminController = require("./controllers/adminController");
+const authController = require("./controllers/authController");
 
 // On paramètre notre router
 router.get("/", mainController.renderHomePage);
@@ -23,6 +24,9 @@ router.get("/search/result", searchController.renderResultPage);
 router.get("/admin/addStudent", adminController.renderAddStudentPage);
 router.post("/admin/addStudent", adminController.createStudent);
 
+// Authentification
+router.get('/login', authController.getLogin);
+router.post('/login', authController.postLogin);
 
 
 
